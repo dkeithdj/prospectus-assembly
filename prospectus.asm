@@ -74,13 +74,13 @@ option casemap :none
 ; 3RD YEAR 1ST SEM END
 ; 3RD YEAR 2ND SEM START
   y3s2     db 10,10,8,32,          "3rd Year/2nd Sem"                                                             ,0
-  phys102  db 10,8,32,             "[1]PHYS 102    ",9,9,"4.0",9,9,"COLLEGE PHYSICS 2",                            0,51
-  cse13    db 10,8,32,             "[2]CSE 13      ",9,9,"3.0",9,9,"CS PROFESSIONAL ELECTIVE 3",                   0,51
-  cs15     db 10,8,32,             "[3]CS 15       ",9,9,"3.0",9,9,"PROGRAMMING LANGUAGES",                        0,51
+  phys102  db 10,8,32,             "[1]PHYS 102/L  ",9,9,"4.0",9,9,"COLLEGE PHYSICS 2",                            0,51
+  cse13    db 10,8,32,             "[2]CSE 13/L    ",9,9,"3.0",9,9,"CS PROFESSIONAL ELECTIVE 3",                   0,51
+  cs15     db 10,8,32,             "[3]CS 15/L     ",9,9,"3.0",9,9,"PROGRAMMING LANGUAGES",                        0,51
   ge20     db 10,8,32,             "[4]GE 20       ",9,9,"3.0",9,9,"READING VISUAL ARTS",                          0,51
-  cst14    db 10,8,32,             "[5]CST 14      ",9,9,"3.0",9,9,"CS PROFESSIONAL TRACK 4",                      0,51
-  cs11     db 10,8,32,             "[6]CS 11       ",9,9,"3.0",9,9,"ARCHITECTURE AND ORGANIZATION",                0,51
-  cs17     db 10,8,32,             "[7]CS 17       ",9,9,"3.0",9,9,"SOFTWARE ENGINEERING 2",                       0,51
+  cst14    db 10,8,32,             "[5]CST 14/L    ",9,9,"3.0",9,9,"CS PROFESSIONAL TRACK 4",                      0,51
+  cs11     db 10,8,32,             "[6]CS 11/L     ",9,9,"3.0",9,9,"ARCHITECTURE AND ORGANIZATION",                0,51
+  cs17     db 10,8,32,             "[7]CS 17/L     ",9,9,"3.0",9,9,"SOFTWARE ENGINEERING 2",                       0,51
   uge2     db 10,8,32,             "[8]UGE 2       ",9,9,"3.0",9,9,"TECHNICAL WRITING IN THE DISCIPLINE",          0,51
 ; 3RD YEAR 2ND SEM END
 ; 3RD YEAR SUMMER SEM START
@@ -103,14 +103,51 @@ option casemap :none
   cs22     db 10,8,32,             "[2]CS 22       ",9,9,"3.0",9,9,"INFORMATION ASSURANCE AND SECURITY",           0,51
 ; 4TH YEAR 2ND SEM END
 
+; MENU
+  selYL db 10,10,8,"1: 1st Year",10,"2: 2nd Year",10,"3: 3rd Year",10,"4: 4th Year",10,"Select Year Level: ",0
+  errYL db 10,8,32,"Select only from 1-4",0
+
+  selSE db 10,10,8,"1: 1st Sem",10,"2: 2nd Sem",10,"s: Summer",10,"Select Semester: ",0
+  errSE db 10,8,32,"Select only from [1,2,s]",0
+
+  comp   db 10,10,8,"Type [C] to comlete",0
+  inv    db 10,10,8,"Invalid input, select the appropriate option",0
+  selSU9 db 10,10,8,"Select Subject [1-9]: ",0
+  selSU8 db 10,10,8,"Select Subject [1-8]: ",0
+  selSU7 db 10,10,8,"Select Subject [1-7]: ",0
+  selSU6 db 10,10,8,"Select Subject [1-6]: ",0
+  selSU2 db 10,10,8,"Select Subject [1-2]: ",0
+
+  totalU db "Total Units: ", 0
+
+  total  DWORD ?
+
+  list byte 2,4,7,3
+
+
 .data?
+; INPUTS
 	studNameIn  db 100 dup(?)
 	courseIn    db 100 dup(?)
 	yearIn      db 100 dup(?)
+	semIn       db 100 dup(?)
+	subIn       db 100 dup(?)
 	year1sem1In db 10  dup(?) ;1st Year/1st Sem
   year1sem2In db 10  dup(?) ;1st Year/2nd Sem
   year2sem1In db 10  dup(?) ;2nd Year/1st Sem
   year2sem2In db 10  dup(?) ;2nd Year/2nd Sem
+
+  selected db 500 dup(?)
+
+  sel1 db 500 dup(?)
+  sel2 db 500 dup(?)
+  sel3 db 500 dup(?)
+  sel4 db 500 dup(?)
+  sel5 db 500 dup(?)
+  sel6 db 500 dup(?)
+  sel7 db 500 dup(?)
+  sel8 db 500 dup(?)
+  sel9 db 500 dup(?)
 
 .code
 start: 
@@ -124,6 +161,9 @@ start:
   invoke StdIn,  addr courseIn, 100
 	invoke StdOut, addr year
   invoke StdIn,  addr yearIn, 100
+
+
+
   JMP display
 
 display:
@@ -214,6 +254,228 @@ display:
 	invoke StdOut, addr header
   invoke StdOut, addr cs23
   invoke StdOut, addr cs22
+  
+  jmp LEVEL
+
+LEVEL:
+  invoke StdOut, addr selYL
+  invoke StdIn,  addr yearIn, 10
+  .if yearIn == "1"
+    jmp YEAR1
+  ; .elseif yearIn == "2"
+  ;   jmp YEAR2
+  ; .elseif yearIn == "3"
+  ;   jmp YEAR3
+  ; .elseif yearIn == "4"
+  ;   jmp YEAR4
+  .else
+    invoke StdOut, addr errYL
+    jmp LEVEL
+  .endif
+
+; START YEAR CHOICE
+YEAR1:
+  invoke StdOut, addr selSE
+  invoke StdIn,  addr semIn, 10
+  .if semIn == "1"
+    jmp SEM11
+  ; .elseif semIn == "2"
+  ;   jmp SEM12
+  .else
+    invoke StdOut, addr errSE
+    jmp LEVEL
+  .endif
+
+; YEAR2:
+;   invoke StdOut, addr selSE
+;   invoke StdIn,  addr semIn, 10
+;   .if semIn == "1"
+;     jmp SEM21
+;   .elseif semIn == "2"
+;     jmp SEM22
+;   .else
+;     invoke StdOut, addr errSE
+;     jmp LEVEL
+;   .endif
+;
+; YEAR3:
+;   invoke StdOut, addr selSE
+;   invoke StdIn,  addr semIn, 10
+;   .if semIn == "1"
+;     jmp SEM31
+;   .elseif semIn == "2"
+;     jmp SEM32
+;   .elseif semIn == "s"
+;     jmp SEM3S
+;   .else
+;     invoke StdOut, addr errSE
+;     jmp LEVEL
+;   .endif
+;
+; YEAR4:
+;   invoke StdOut, addr selSE
+;   invoke StdIn,  addr semIn, 10
+;   .if semIn == "1"
+;     jmp SEM41
+;   .elseif semIn == "2"
+;     jmp SEM42
+;   .else
+;     invoke StdOut, addr errSE
+;     jmp LEVEL
+;   .endif
+; END YEAR CHOICE
+
+; START SEM1 CHOICE
+SEM11:
+  invoke ClearScreen
+  invoke StdOut, addr comp
+  invoke StdOut, addr y1s1
+	invoke StdOut, addr header
+
+  invoke StdOut, addr cs8
+  invoke StdOut, addr ge2
+  invoke StdOut, addr ge15
+  invoke StdOut, addr ge3
+  invoke StdOut, addr pahf1
+  invoke StdOut, addr cce101
+  invoke StdOut, addr cce109
+  invoke StdOut, addr nstp1
+  jmp SELSUB11
+
+; SELECT SUBJECTS TO ADD
+SELSUB11:
+  invoke StdOut, addr selSU8
+  invoke StdIn, addr subIn, 10
+  .if subIn == "1"
+  invoke StdOut, addr sel1
+    add eax, 3
+    sub eax, 1
+    add total, eax
+    invoke StdOut, addr cs8
+
+    mov esi, offset cs8
+    mov edi, offset sel1
+    cld
+    mov ecx, lengthof cs8
+    rep movsb
+  .elseif subIn == "2"
+    add eax, 3
+    sub eax, 1
+    add total, eax
+    invoke StdOut, addr ge2
+
+    mov esi, offset ge2
+    mov edi, offset sel2
+    cld
+    mov ecx, lengthof ge2
+    rep movsb
+  .elseif subIn == "3"
+    add eax, 3
+    sub eax, 1
+    add total, eax
+    invoke StdOut, addr ge15
+
+    mov esi, offset ge15
+    mov edi, offset sel3
+    cld
+    mov ecx, lengthof ge15
+    rep movsb
+  .elseif subIn == "4"
+    add eax, 3
+    sub eax, 1
+    add total, eax
+    invoke StdOut, addr ge3
+
+    mov esi, offset ge3
+    mov edi, offset sel4
+    cld
+    mov ecx, lengthof ge3
+    rep movsb
+  .elseif subIn == "5"
+    add eax, 2
+    sub eax, 1
+    add total, eax
+    invoke StdOut, addr pahf1
+
+    mov esi, offset pahf1
+    mov edi, offset sel5
+    cld
+    mov ecx, lengthof pahf1
+    rep movsb
+  .elseif subIn == "6"
+    add eax, 3
+    sub eax, 1
+    add total, eax
+    invoke StdOut, addr cce101
+
+    mov esi, offset cce101
+    mov edi, offset sel6
+    cld
+    mov ecx, lengthof cce101
+    rep movsb
+  .elseif subIn == "7"
+    add eax, 3
+    sub eax, 1
+    add total, eax
+    invoke StdOut, addr cce109
+
+    mov esi, offset cce109
+    mov edi, offset sel7
+    cld
+    mov ecx, lengthof cce109
+    rep movsb
+  .elseif subIn == "8"
+    add eax, 3
+    sub eax, 1
+    add total, eax
+    invoke StdOut, addr nstp1
+
+    mov esi, offset nstp1
+    mov edi, offset sel8
+    cld
+    mov ecx, lengthof nstp1
+    rep movsb
+  .elseif subIn == "D"
+    jmp TOTAL11
+  .else
+    invoke StdOut, addr inv
+    jmp SELSUB11
+  .endif
+  jmp SELSUB11
+
+  
+
+; SUMMARIZES SELECTED SUBJECTS
+TOTAL11:
+  mov eax, total 
+  invoke dwtoa, eax, addr subIn
+  invoke ClearScreen
+  invoke StdOut, addr uMin
+  invoke StdOut, addr major
+  invoke StdOut, addr dept
+  invoke StdOut, addr studName
+  invoke StdOut,  addr studNameIn
+  invoke StdOut, addr course
+  invoke StdOut,  addr courseIn
+	invoke StdOut, addr year
+  invoke StdOut,  addr yearIn
+
+  invoke StdOut, addr sel1
+  invoke StdOut, addr sel2
+  invoke StdOut, addr sel3
+  invoke StdOut, addr sel4
+  invoke StdOut, addr sel5
+  invoke StdOut, addr sel6
+  invoke StdOut, addr sel7
+  invoke StdOut, addr sel8
+  ;
+  ;TOTAL DISPLAY
+  invoke StdOut, addr totalU
+  invoke StdOut, addr subIn 
+
+  jmp EXIT
+
+
 
 EXIT:
 
@@ -222,4 +484,18 @@ invoke ExitProcess, 0
 end start
 
 
-
+; SELSUB11:
+;   invoke StdOut, addr selSU8
+;   invoke StdIn, addr subIn, 10
+;   .if subIn == "1"
+;   .elseif subIn == "2"
+;   .elseif subIn == "3"
+;   .elseif subIn == "4"
+;   .elseif subIn == "5"
+;   .elseif subIn == "6"
+;   .elseif subIn == "7"
+;   .elseif subIn == "8"
+;   .elseif subIn == "9"
+;   .elseif subIn == "D"
+;   .endif
+;
