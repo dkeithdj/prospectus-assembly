@@ -1,4 +1,6 @@
-# A program that selects subjects on the prospectus of **BSCS** written in **MASM32**
+# Prospectus Assembly
+
+A program that selects subjects on the prospectus of **BSCS** written in **MASM32**
 
 Commands to run the program:
 
