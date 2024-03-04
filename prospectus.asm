@@ -122,8 +122,6 @@ option casemap :none
 
   total  DWORD ?
 
-  list byte 2,4,7,3
-
 
 .data?
 ; INPUTS
