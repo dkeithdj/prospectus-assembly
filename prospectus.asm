@@ -9,15 +9,17 @@ option casemap :none
   includelib C:\masm32\lib\masm32.lib
 
 .data
-; HEADEAR START
+; HEADER START
   uMin     db  10,10,9,9,9,9,8,32, "UNIVERSITY OF MINDANAO"                  ,0
   major    db  10,9,9,8,32,        "Bachelor of Science in Computer Science" ,0
   dept     db  10,9,9,9,8,32,      "COLLEGE OF COMPUTING EDUCATION EDUCATION",0
   studName db  10,10,8,32,         "Name: "                                  ,0
   course   db  10,8,32,            "Course: "                                ,0
   year     db  10,8,32,            "Year: "                                  ,0
-; HEADEAR END
+
+; HEADER END
   header   db  10,8,32,            "Subject Code",9,9,9,"Unit",9,9,"Subject Title",0
+
 ; 1ST YEAR 1ST SEM START
   y1s1     db  10,10,8,32,         "1st Year/1st Sem"                                                             ,0
   cs8      db  10,8,32,            "[1]CS 8        ",9,9,"3.0",9,9, "SOCIAL ISSUES AND PROFESSIONAL PRACTICE"        ,0,51
@@ -29,6 +31,7 @@ option casemap :none
   cce109   db  10,8,32,            "[7]CCE 109/L   ",9,9,"3.0",9,9, "FUNDAMENTALS OF PROGRAMMING"                    ,0,51
   nstp1    db  10,8,32,            "[8]NSTP 1      ",9,9,"3.0",9,9, "NATIONAL SERVICE TRAINING PROGRAM 1"            ,0,51
 ; 1ST YEAR 1ST SEM END
+
 ; 1ST YEAR 2ND SEM START
   y1s2     db 10,10,8,32,          "1st Year/2nd Sem"                                                             ,0
   uge1     db 10,8,32,             "[1]UGE 1       ",9,9,"6.0",9,9, "READING COMPREHENSION",                          0,51
@@ -40,6 +43,7 @@ option casemap :none
   pahf2    db 10,8,32,             "[7]PAHF 2      ",9,9,"2.0",9,9, "EXERCISE-BASED FITNESS ACTIVITY",                0,51
   nstp2    db 10,8,32,             "[8]NSTP 2      ",9,9,"3.0",9,9, "NATIONAL SERVICE TRAINING PROGRAM 2",            0,51
 ; 1ST YEAR 2ND SEM END
+
 ; 2ND YEAR 1ST SEM START
   y2s1     db 10,10,8,32,          "2nd Year/1st Sem"                                                             ,0 
   hci101   db 10,8,32,             "[1]HCI 101     ",9,9,"3.0",9,9, "HUMAN COMPUTER INTERACTION",                    0,51
@@ -52,6 +56,7 @@ option casemap :none
   mth105   db 10,8,32,             "[8]MTH 105     ",9,9,"3.0",9,9, "INTEGRAL CALCULUS",                             0,51
   pahf3    db 10,8,32,             "[9]PAHF 3      ",9,9,"2.0",9,9, "DANCE AND SPORTS 1",                            0,51
 ; 2ND YEAR 1ST SEM END
+
 ; 2ND YEAR 2ND SEM START
   y2s2     db 10,10,8,32,          "2nd Year/2nd Sem"                                                             ,0
   ge6      db 10,8,32,             "[1]GE 6        ",9,9,"3.0",9,9,"RIZAL'S LIFE AND WORKS",                       0,51
@@ -64,6 +69,7 @@ option casemap :none
   cse7     db 10,8,32,             "[8]CSE 7/L     ",9,9,"3.0",9,9,"CS PROFESSIONAL ELECTIVE 1",                   0,51
   pahf4    db 10,8,32,             "[9]PAHF 4      ",9,9,"2.0",9,9,"DANCE AND SPORTS 2",                           0,51
 ; 2ND YEAR 2ND SEM END
+
 ; 3RD YEAR 1ST SEM START
   y3s1     db 10,10,8,32,          "3rd Year/1st Sem"                                                             ,0
   bsm325   db 10,8,32,             "[1]BSM 325     ",9,9,"3.0",9,9,"NUMERICAL ANALYSIS",                           0,51
@@ -72,6 +78,7 @@ option casemap :none
   cs12     db 10,8,32,             "[5]CS 12/L     ",9,9,"3.0",9,9,"SOFTWARE ENGINEERING 1",                       0,51
   phys101  db 10,8,32,             "[7]PHYS 101/L  ",9,9,"4.0",9,9,"COLLEGE PHYSICS 1",                            0,51
 ; 3RD YEAR 1ST SEM END
+
 ; 3RD YEAR 2ND SEM START
   y3s2     db 10,10,8,32,          "3rd Year/2nd Sem"                                                             ,0
   phys102  db 10,8,32,             "[1]PHYS 102/L  ",9,9,"4.0",9,9,"COLLEGE PHYSICS 2",                            0,51
@@ -83,11 +90,13 @@ option casemap :none
   cs17     db 10,8,32,             "[7]CS 17/L     ",9,9,"3.0",9,9,"SOFTWARE ENGINEERING 2",                       0,51
   uge2     db 10,8,32,             "[8]UGE 2       ",9,9,"3.0",9,9,"TECHNICAL WRITING IN THE DISCIPLINE",          0,51
 ; 3RD YEAR 2ND SEM END
+
 ; 3RD YEAR SUMMER SEM START
   y3ss     db 10,10,8,32,          "3rd Year/Summer"                                                             ,0
   cs16     db 10,8,32,             "[1]CS 16       ",9,9,"6.0",9,9,"PRACTICUM",                                    0,51
   cs20     db 10,8,32,             "[2]CS 20       ",9,9,"3.0",9,9,"CS PROFESSIONAL TRACK 5",                      0,51
 ; 3RD YEAR SUMMER SEM END
+
 ; 4TH YEAR 1ST SEM START
   y4s1     db 10,10,8,32,          "4th Year/2nd Sem"                                                             ,0
   cs19     db 10,8,32,             "[1]CS 19       ",9,9,"4.0",9,9,"OPERATING SYSTEMS",                            0,51
@@ -97,6 +106,7 @@ option casemap :none
   cs21     db 10,8,32,             "[5]CS 21       ",9,9,"3.0",9,9,"NETWORKS AND COMMUNICATIONS",                  0,51
   cs18     db 10,8,32,             "[6]CS 18       ",9,9,"3.0",9,9,"CS THESIS WRITING 1",                          0,51
 ; 4TH YEAR 1ST SEM END
+
 ; 4TH YEAR 2ND SEM START
   y4s2     db 10,10,8,32,          "4th Year/2nd Sem"                                                             ,0
   cs23     db 10,8,32,             "[1]CS 23       ",9,9,"6.0",9,9,"CS THESIS WRITING 2",                          0,51
@@ -159,7 +169,7 @@ start:
   invoke StdIn,  addr courseIn, 100
 	invoke StdOut, addr year
   invoke StdIn,  addr yearIn, 100
-  
+
   JMP display
 
 display:
@@ -174,6 +184,7 @@ display:
   invoke StdOut, addr cce101
   invoke StdOut, addr cce109
   invoke StdOut, addr nstp1
+
 ;1st Year/2nd Sem
   invoke StdOut, addr y1s2
 	invoke StdOut, addr header
@@ -185,6 +196,7 @@ display:
   invoke StdOut, addr mth101
   invoke StdOut, addr pahf2
   invoke StdOut, addr nstp2
+
 ;2nd year/1st sem
   invoke StdOut, addr y2s1
 	invoke StdOut, addr header
@@ -197,6 +209,7 @@ display:
   invoke StdOut, addr mth103
   invoke StdOut, addr mth105
 	invoke StdOut, addr pahf3
+
 ;2nd year/2nd sem
   invoke StdOut, addr y2s2
 	invoke StdOut, addr header
@@ -209,6 +222,7 @@ display:
   invoke StdOut, addr bsm312
   invoke StdOut, addr cse7
 	invoke StdOut, addr pahf4
+
 ;3rd year/1st sem
   invoke StdOut, addr y3s1
 	invoke StdOut, addr header
@@ -220,6 +234,7 @@ display:
   invoke StdOut, addr ge15
   invoke StdOut, addr phys101
   invoke StdOut, addr cse7
+
 ;3rd year/2nd sem
   invoke StdOut, addr y3s2
 	invoke StdOut, addr header
@@ -231,11 +246,13 @@ display:
   invoke StdOut, addr cs11
   invoke StdOut, addr cs17
   invoke StdOut, addr uge2
+
 ;3rd year/summer
   invoke StdOut, addr y3ss
 	invoke StdOut, addr header
   invoke StdOut, addr cs16
   invoke StdOut, addr cs20
+
 ;4th year/1st sem
   invoke StdOut, addr y4s1
 	invoke StdOut, addr header
@@ -245,6 +262,7 @@ display:
   invoke StdOut, addr cce106
   invoke StdOut, addr cs21
   invoke StdOut, addr cs18
+
 ;4th year/2nd sem
   invoke StdOut, addr y4s2
 	invoke StdOut, addr header
@@ -293,7 +311,7 @@ YEAR1:
 ;     invoke StdOut, addr errSE
 ;     jmp LEVEL
 ;   .endif
-;
+
 ; YEAR3:
 ;   invoke StdOut, addr selSE
 ;   invoke StdIn,  addr semIn, 10
@@ -307,7 +325,7 @@ YEAR1:
 ;     invoke StdOut, addr errSE
 ;     jmp LEVEL
 ;   .endif
-;
+
 ; YEAR4:
 ;   invoke StdOut, addr selSE
 ;   invoke StdIn,  addr semIn, 10
