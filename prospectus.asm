@@ -159,9 +159,7 @@ start:
   invoke StdIn,  addr courseIn, 100
 	invoke StdOut, addr year
   invoke StdIn,  addr yearIn, 100
-
-
-
+  
   JMP display
 
 display:
