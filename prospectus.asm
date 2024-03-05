@@ -10,133 +10,134 @@ option casemap :none
 
 .data
 ; HEADER START
-  uMin     db  10,10,9,9,9,9,9,9,9,8,32, "UNIVERSITY OF MINDANAO"                  ,0
-  major    db  10,9,9,9,9,9,9,8,32,        "Bachelor of Science in Computer Science" ,0
-  dept     db  10,9,9,9,9,9,9,8,32,      "COLLEGE OF COMPUTING EDUCATION EDUCATION",0
-  studName db  10,10,8,32,         "Name: "                                  ,0
-  course   db  10,8,32,            "Course: "                                ,0
-  year     db  10,8,32,            "Year: "                                  ,0
+  uMin     db  10,10,9,9,9,9,9,9,9,32, "UNIVERSITY OF MINDANAO"                  ,0
+  major    db  10,9,9,9,9,9,9,32,        "Bachelor of Science in Computer Science" ,0
+  dept     db  10,9,9,9,9,9,9,32,      "COLLEGE OF COMPUTING EDUCATION EDUCATION",0
+  studName db  10,10, "Name: ",0
+  course   db  "Course: ",0
+  year     db  "Year: ",0
 
 ; BORDERS AND HEADER
-  plainBor db  10,8,32,            "___________________________________________________________________________________________",0
+  plainBor db  10,32,            "___________________________________________________________________________________________",0
   ;YEAR AND SEM HERE
-  border   db  10,8,32,            "|-------------|--|----|--|-------------------------------------------------|--|-----------|",0,51
-  header   db  10,8,32,            "|Subject Code |  |Unit|  |Subject Title                                    |  |Prereq.    |",0,51
+  border   db  10,32,            "|-------------|--|----|--|-------------------------------------------------|--|-----------|",0,51
+  header   db  10,32,            "|Subject Code |  |Unit|  |Subject Title                                    |  |Prereq.    |",0,51
 
 ; 1ST YEAR 1ST SEM START
-  y1s1     db  10,8,32,            "|                                   1st Year/1st Sem                                      |",0
-  cs8      db  10,8,32,            "|[1]CS 8      |  |3.0 |  |SOCIAL ISSUES AND PROFESSIONAL PRACTICE          |  |None       |",0,51
-  ge2      db  10,8,32,            "|[2]GE 2      |  |6.0 |  |PURPOSIVE COMMUNICATION W/ INTERACTIVE LEARNING  |  |None       |",0,51
-  ge15     db  10,8,32,            "|[3]GE 15     |  |3.0 |  |ENVIRONMENTAL SCIENCE                            |  |None       |",0,51
-  ge3      db  10,8,32,            "|[4]GE 3      |  |3.0 |  |THE CONTEMPORARY WORLD                           |  |None       |",0,51
-  pahf1    db  10,8,32,            "|[5]PAHF 1    |  |2.0 |  |MOVEMENT COMPETENCY TRAINING                     |  |None       |",0,51
-  cce101   db  10,8,32,            "|[6]CCE 101/L |  |3.0 |  |INTRODUCTION TO COMPUTING (1ST T)                |  |None       |",0,51
-  cce109   db  10,8,32,            "|[7]CCE 109/L |  |3.0 |  |FUNDAMENTALS OF PROGRAMMING                      |  |None       |",0,51
-  nstp1    db  10,8,32,            "|[8]NSTP 1    |  |3.0 |  |NATIONAL SERVICE TRAINING PROGRAM 1              |  |None       |",0,51
+  y1s1     db  10,32,            "|                                   1st Year/1st Sem                                      |",0
+  cs8      db  10,32,            "|[1]CS 8      |  |3.0 |  |SOCIAL ISSUES AND PROFESSIONAL PRACTICE          |  |None       |",0,51
+  ge2      db  10,32,            "|[2]GE 2      |  |6.0 |  |PURPOSIVE COMMUNICATION W/ INTERACTIVE LEARNING  |  |None       |",0,51
+  ge15     db  10,32,            "|[3]GE 15     |  |3.0 |  |ENVIRONMENTAL SCIENCE                            |  |None       |",0,51
+  ge3      db  10,32,            "|[4]GE 3      |  |3.0 |  |THE CONTEMPORARY WORLD                           |  |None       |",0,51
+  pahf1    db  10,32,            "|[5]PAHF 1    |  |2.0 |  |MOVEMENT COMPETENCY TRAINING                     |  |None       |",0,51
+  cce101   db  10,32,            "|[6]CCE 101/L |  |3.0 |  |INTRODUCTION TO COMPUTING (1ST T)                |  |None       |",0,51
+  cce109   db  10,32,            "|[7]CCE 109/L |  |3.0 |  |FUNDAMENTALS OF PROGRAMMING                      |  |None       |",0,51
+  nstp1    db  10,32,            "|[8]NSTP 1    |  |3.0 |  |NATIONAL SERVICE TRAINING PROGRAM 1              |  |None       |",0,51
 ; 1ST YEAR 1ST SEM END
 
 ; 1ST YEAR 2ND SEM START
-  y1s2     db  10,8,32,            "|                                   1st Year/2nd Sem                                      |",0
-  uge1     db  10,8,32,            "|[1]UGE 1     |  |6.0 |  |READING COMPREHENSION                            |  |GE 2       |",0,51
-  ge1      db  10,8,32,            "|[2]GE 1      |  |3.0 |  |UNDERSTANDING THE SELF                           |  |None       |",0,51
-  ge4      db  10,8,32,            "|[3]GE 4      |  |3.0 |  |MATHEMATICS IN THE MODERN WORLD                  |  |None       |",0,51
-  cce107   db  10,8,32,            "|[4]CCE 107/l |  |3.0 |  |INTERMEDIATE PROGRAMMING                         |  |CCE 109/L  |",0,51
-  cs25     db  10,8,32,            "|[5]CS 25     |  |3.0 |  |DISCRETE STRUCTURES 1                            |  |None       |",0,51
-  mth101   db  10,8,32,            "|[6]MTH 101   |  |3.0 |  |DIFFERENTIAL CALCULUS                            |  |None       |",0,51
-  pahf2    db  10,8,32,            "|[7]PAHF 2    |  |2.0 |  |EXERCISE-BASED FITNESS ACTIVITY                  |  |PAHF 1     |",0,51
-  nstp2    db  10,8,32,            "|[8]NSTP 2    |  |3.0 |  |NATIONAL SERVICE TRAINING PROGRAM 2              |  |NSTP 1     |",0,51
+  y1s2     db  10,32,            "|                                   1st Year/2nd Sem                                      |",0
+  uge1     db  10,32,            "|[1]UGE 1     |  |6.0 |  |READING COMPREHENSION                            |  |GE 2       |",0,51
+  ge1      db  10,32,            "|[2]GE 1      |  |3.0 |  |UNDERSTANDING THE SELF                           |  |None       |",0,51
+  ge4      db  10,32,            "|[3]GE 4      |  |3.0 |  |MATHEMATICS IN THE MODERN WORLD                  |  |None       |",0,51
+  cce107   db  10,32,            "|[4]CCE 107/l |  |3.0 |  |INTERMEDIATE PROGRAMMING                         |  |CCE 109/L  |",0,51
+  cs25     db  10,32,            "|[5]CS 25     |  |3.0 |  |DISCRETE STRUCTURES 1                            |  |None       |",0,51
+  mth101   db  10,32,            "|[6]MTH 101   |  |3.0 |  |DIFFERENTIAL CALCULUS                            |  |None       |",0,51
+  pahf2    db  10,32,            "|[7]PAHF 2    |  |2.0 |  |EXERCISE-BASED FITNESS ACTIVITY                  |  |PAHF 1     |",0,51
+  nstp2    db  10,32,            "|[8]NSTP 2    |  |3.0 |  |NATIONAL SERVICE TRAINING PROGRAM 2              |  |NSTP 1     |",0,51
 ; 1ST YEAR 2ND SEM END
 
 ; 2ND YEAR 1ST SEM START
-  y2s1     db  10,8,32,            "|                                   2nd Year/1st Sem                                      |",0
-  hci101   db  10,8,32,            "|[1]HCI 101   |  |3.0 |  |HUMAN COMPUTER INTERACTION                       |  |CCE 107/L  |",0,51
-  cce104   db  10,8,32,            "|[2]CCE 104/L |  |3.0 |  |INFORMATION MANAGEMENT                           |  |CCE 107/L  |",0,51
-  cs26     db  10,8,32,            "|[3]CS 26/L   |  |3.0 |  |SOFTWARE DEVELOPMENT FUNDAMENTALS                |  |CCE 107/L  |",0,51
-  cs3      db  10,8,32,            "|[4]CS 3/L    |  |3.0 |  |DISCRETE STRUCTURES 2                            |  |CS 25      |",0,51
-  cce105   db  10,8,32,            "|[5]CCE 105/L |  |3.0 |  |DATA STRUCTURES AND ALGORITHMS                   |  |CCE 107/L  |",0,51
-  cst4     db  10,8,32,            "|[6]CST 4/L   |  |3.0 |  |CS PROFESSIONAL TRACK 1                          |  |CCE 107/L  |",0,51
-  mth103   db  10,8,32,            "|[7]MTH103/L  |  |3.0 |  |PROBABILITIES AND STATISTICS                     |  |GE 4       |",0,51
-  mth105   db  10,8,32,            "|[8]MTH 105   |  |3.0 |  |INTEGRAL CALCULUS                                |  |MTH 101    |",0,51
-  pahf3    db  10,8,32,            "|[9]PAHF 3    |  |2.0 |  |DANCE AND SPORTS 1                               |  |PAHF 2     |",0,51
+  y2s1     db  10,32,            "|                                   2nd Year/1st Sem                                      |",0
+  hci101   db  10,32,            "|[1]HCI 101   |  |3.0 |  |HUMAN COMPUTER INTERACTION                       |  |CCE 107/L  |",0,51
+  cce104   db  10,32,            "|[2]CCE 104/L |  |3.0 |  |INFORMATION MANAGEMENT                           |  |CCE 107/L  |",0,51
+  cs26     db  10,32,            "|[3]CS 26/L   |  |3.0 |  |SOFTWARE DEVELOPMENT FUNDAMENTALS                |  |CCE 107/L  |",0,51
+  cs3      db  10,32,            "|[4]CS 3/L    |  |3.0 |  |DISCRETE STRUCTURES 2                            |  |CS 25      |",0,51
+  cce105   db  10,32,            "|[5]CCE 105/L |  |3.0 |  |DATA STRUCTURES AND ALGORITHMS                   |  |CCE 107/L  |",0,51
+  cst4     db  10,32,            "|[6]CST 4/L   |  |3.0 |  |CS PROFESSIONAL TRACK 1                          |  |CCE 107/L  |",0,51
+  mth103   db  10,32,            "|[7]MTH103/L  |  |3.0 |  |PROBABILITIES AND STATISTICS                     |  |GE 4       |",0,51
+  mth105   db  10,32,            "|[8]MTH 105   |  |3.0 |  |INTEGRAL CALCULUS                                |  |MTH 101    |",0,51
+  pahf3    db  10,32,            "|[9]PAHF 3    |  |2.0 |  |DANCE AND SPORTS 1                               |  |PAHF 2     |",0,51
 ; 2ND YEAR 1ST SEM END
 
 ; 2ND YEAR 2ND SEM START
-  y2s2     db  10,8,32,            "|                                   2nd Year/2nd Sem                                      |",0
-  ge6      db  10,8,32,            "|[1]GE6       |  |3.0 |  |RIZAL'S LIFE AND WORKS                           |  |None       |",0,51
-  ge8      db  10,8,32,            "|[2]GE8       |  |3.0 |  |READINGS IN PHILIPPINE HISTORY                   |  |None       |",0,51
-  cst5     db  10,8,32,            "|[3]CST 5/L   |  |2.0 |  |CS PROFESSIONAL TRACK 2                          |  |CST 4/L    |",0,51
-  ge11     db  10,8,32,            "|[4]GE 11     |  |3.0 |  |THE ENTREPRENEURIAL MIND                         |  |None       |",0,51
-  bsm222   db  10,8,32,            "|[5]BSM 222   |  |3.0 |  |LINEAR ALGEBRA                                   |  |MTH 101    |",0,51
-  cs6      db  10,8,32,            "|[6]CS 6/L    |  |2.0 |  |ALGORITHMS AND COMPLEXITY                        |  |CCE 105/L  |",0,51
-  bsm312   db  10,8,32,            "|[7]BSM 312   |  |3.0 |  |DIFFERENTIAL EQUATIONS                           |  |MTH 105    |",0,51
-  cse7     db  10,8,32,            "|[8]CSE 7/L   |  |2.0 |  |CS PROFESSIONAL ELECTIVE 1                       |  |CCE 104/L  |",0,51
-  pahf4    db  10,8,32,            "|[9]PAHF 4    |  |2.0 |  |DANCE AND SPORTS 2                               |  |PAHF 3     |",0,51
+  y2s2     db  10,32,            "|                                   2nd Year/2nd Sem                                      |",0
+  ge6      db  10,32,            "|[1]GE6       |  |3.0 |  |RIZAL'S LIFE AND WORKS                           |  |None       |",0,51
+  ge8      db  10,32,            "|[2]GE8       |  |3.0 |  |READINGS IN PHILIPPINE HISTORY                   |  |None       |",0,51
+  cst5     db  10,32,            "|[3]CST 5/L   |  |2.0 |  |CS PROFESSIONAL TRACK 2                          |  |CST 4/L    |",0,51
+  ge11     db  10,32,            "|[4]GE 11     |  |3.0 |  |THE ENTREPRENEURIAL MIND                         |  |None       |",0,51
+  bsm222   db  10,32,            "|[5]BSM 222   |  |3.0 |  |LINEAR ALGEBRA                                   |  |MTH 101    |",0,51
+  cs6      db  10,32,            "|[6]CS 6/L    |  |2.0 |  |ALGORITHMS AND COMPLEXITY                        |  |CCE 105/L  |",0,51
+  bsm312   db  10,32,            "|[7]BSM 312   |  |3.0 |  |DIFFERENTIAL EQUATIONS                           |  |MTH 105    |",0,51
+  cse7     db  10,32,            "|[8]CSE 7/L   |  |2.0 |  |CS PROFESSIONAL ELECTIVE 1                       |  |CCE 104/L  |",0,51
+  pahf4    db  10,32,            "|[9]PAHF 4    |  |2.0 |  |DANCE AND SPORTS 2                               |  |PAHF 3     |",0,51
 ; 2ND YEAR 2ND SEM END
 
 ; 3RD YEAR 1ST SEM START
-  y3s1     db  10,8,32,            "|                                   3rd Year/1st Sem                                      |",0
-  ge5      db  10,8,32,            "|[1]GE 5      |  |3.0 |  |SCIENCE, TECHNOLOGY AND SOCIETY                  |  |None       |",0,51
-  cs12     db  10,8,32,            "|[2]CS 12/L   |  |3.0 |  |SOFTWARE ENGINEERING 1                           |  |CS 26/L    |",0,51
-  cst9     db  10,8,32,            "|[3]CST 9/L   |  |3.0 |  |CS PROFESSIONAL TRACK 3                          |  |CST 5/L    |",0,51
-  cs15     db  10,8,32,            "|[4]CST 15/L  |  |3.0 |  |PROGRAMMING LANGUAGES                            |  |CS 26/L    |",0,51
-  bsm325   db  10,8,32,            "|[5]BSM 325   |  |3.0 |  |NUMERICAL ANALYSIS                               |  |BSM 222,   |",10,8,32,
-                                   "|             |  |    |  |                                                 |  |BSM 312    |",0,51
-  phys101  db  10,8,32,            "|[6]PHYS 101/L|  |4.0 |  |COLLEGE PHYSICS 1                                |  |GE 4       |",0,51
-  ge7      db  10,8,32,            "|[7]GE 7      |  |3.0 |  |ART APPRECIATION                                 |  |None       |",0,51
-  cs11     db  10,8,32,            "|[8]CS 11/L   |  |3.0 |  |ARCHITECTURE AND ORGANIZATION                    |  |CS 3/L     |",0,51
+  y3s1     db  10,32,            "|                                   3rd Year/1st Sem                                      |",0
+  ge5      db  10,32,            "|[1]GE 5      |  |3.0 |  |SCIENCE, TECHNOLOGY AND SOCIETY                  |  |None       |",0,51
+  cs12     db  10,32,            "|[2]CS 12/L   |  |3.0 |  |SOFTWARE ENGINEERING 1                           |  |CS 26/L    |",0,51
+  cst9     db  10,32,            "|[3]CST 9/L   |  |3.0 |  |CS PROFESSIONAL TRACK 3                          |  |CST 5/L    |",0,51
+  cs15     db  10,32,            "|[4]CST 15/L  |  |3.0 |  |PROGRAMMING LANGUAGES                            |  |CS 26/L    |",0,51
+  bsm325   db  10,32,            "|[5]BSM 325   |  |3.0 |  |NUMERICAL ANALYSIS                               |  |BSM 222,   |",10,32,
+                                 "|             |  |    |  |                                                 |  |BSM 312    |",0,51
+  phys101  db  10,32,            "|[6]PHYS 101/L|  |4.0 |  |COLLEGE PHYSICS 1                                |  |GE 4       |",0,51
+  ge7      db  10,32,            "|[7]GE 7      |  |3.0 |  |ART APPRECIATION                                 |  |None       |",0,51
+  cs11     db  10,32,            "|[8]CS 11/L   |  |3.0 |  |ARCHITECTURE AND ORGANIZATION                    |  |CS 3/L     |",0,51
 ; 3RD YEAR 1ST SEM END
 
 ; 3RD YEAR 2ND SEM START
-  y3s2     db  10,8,32,            "|                                   3rd Year/2nd Sem                                      |",0
-  cs20     db  10,8,32,            "|[1]CS 20/L   |  |3.0 |  |CS PROFESSIONAL TRACK 5                          |  |CS 15/L    |",0,51
-  ge20     db  10,8,32,            "|[2]GE 20     |  |3.0 |  |READING VISUAL ARTS                              |  |None       |",0,51
-  cs17     db  10,8,32,            "|[3]CS 17/L   |  |3.0 |  |SOFTWARE ENGINEERING 2                           |  |CS 12/L    |",0,51
-  cse13    db  10,8,32,            "|[4]CSE 13/L  |  |3.0 |  |CS PROFESSIONAL ELECTIVE 3                       |  |CSE 7/L    |",0,51
-  phys102  db  10,8,32,            "|[5]PHYS 102/L|  |4.0 |  |COLLEGE PHYSICS 2                                |  |PHYS 101/L |",0,51
-  cst14    db  10,8,32,            "|[6]CST 14/L  |  |3.0 |  |CS PROFESSIONAL TRACK 4                          |  |CST 9/L    |",0,51
-  cse10    db  10,8,32,            "|[7]CSE 10/L  |  |3.0 |  |CS PROFESSIONAL ELECTIVE 2                       |  |CS 6/L     |",0,51
-  uge2     db  10,8,32,            "|[8]UGE 2     |  |3.0 |  |TECHNICAL WRITING IN THE DISCIPLINE              |  |UGE 1      |",0,51
+  y3s2     db  10,32,            "|                                   3rd Year/2nd Sem                                      |",0
+  cs20     db  10,32,            "|[1]CS 20/L   |  |3.0 |  |CS PROFESSIONAL TRACK 5                          |  |CS 15/L    |",0,51
+  ge20     db  10,32,            "|[2]GE 20     |  |3.0 |  |READING VISUAL ARTS                              |  |None       |",0,51
+  cs17     db  10,32,            "|[3]CS 17/L   |  |3.0 |  |SOFTWARE ENGINEERING 2                           |  |CS 12/L    |",0,51
+  cse13    db  10,32,            "|[4]CSE 13/L  |  |3.0 |  |CS PROFESSIONAL ELECTIVE 3                       |  |CSE 7/L    |",0,51
+  phys102  db  10,32,            "|[5]PHYS 102/L|  |4.0 |  |COLLEGE PHYSICS 2                                |  |PHYS 101/L |",0,51
+  cst14    db  10,32,            "|[6]CST 14/L  |  |3.0 |  |CS PROFESSIONAL TRACK 4                          |  |CST 9/L    |",0,51
+  cse10    db  10,32,            "|[7]CSE 10/L  |  |3.0 |  |CS PROFESSIONAL ELECTIVE 2                       |  |CS 6/L     |",0,51
+  uge2     db  10,32,            "|[8]UGE 2     |  |3.0 |  |TECHNICAL WRITING IN THE DISCIPLINE              |  |UGE 1      |",0,51
 ; 3RD YEAR 2ND SEM END
 
 ; 3RD YEAR SUMMER SEM START
-  y3ss     db  10,8,32,            "|                                   3rd Year/Summer                                       |",0
-  ge9      db  10,8,32,            "|[1]GE 9      |  |3.0 |  |ETHICS (DISCIPLINAL)                             |  |None       |",0,51
-  cs16     db  10,8,32,            "|[2]CS 16     |  |6.0 |  |PRACTICUM                                        |  |CS 17,     |",10,8,32,
-                                   "|             |  |    |  |                                                 |  |CS 11/L    |",0,51
+  y3ss     db  10,32,            "|                                   3rd Year/Summer                                       |",0
+  ge9      db  10,32,            "|[1]GE 9      |  |3.0 |  |ETHICS (DISCIPLINAL)                             |  |None       |",0,51
+  cs16     db  10,32,            "|[2]CS 16     |  |6.0 |  |PRACTICUM                                        |  |CS 17,     |",10,32,
+                                 "|             |  |    |  |                                                 |  |CS 11/L    |",0,51
 ; 3RD YEAR SUMMER SEM END
 
 ; 4TH YEAR 1ST SEM START
-  y4s1     db  10,8,32,            "|                                   4th Year/1st Sem                                      |",0
-  cce106   db  10,8,32,            "|[1]CS 106/L  |  |3.0 |  |APPLICATION DEVELOPMENT AND EMERGING TECHNOLOGIES|  |CST 9/L    |",0,51
-  cs18     db  10,8,32,            "|[2]CS 18/L   |  |3.0 |  |CS THESIS WRITING 1                              |  |CS 17/L,   |",10,8,32,
-                                   "|             |  |    |  |                                                 |  |CSE 13/L   |",0,51
-  cs19     db  10,8,32,            "|[3]CS 19/L   |  |4.0 |  |OPERATING SYSTEMS                                |  |CS 11/L    |",0,51
-  cs24     db  10,8,32,            "|[4]CS 24/L   |  |3.0 |  |CS PROFESSIONAL TRACK 6                          |  |CS 20/L    |",0,51
-  cs21     db  10,8,32,            "|[5]CS 21/L   |  |3.0 |  |NETWORKS AND COMMUNICATIONS                      |  |CS 11/L    |",0,51
+  y4s1     db  10,32,            "|                                   4th Year/1st Sem                                      |",0
+  cce106   db  10,32,            "|[1]CS 106/L  |  |3.0 |  |APPLICATION DEVELOPMENT AND EMERGING TECHNOLOGIES|  |CST 9/L    |",0,51
+  cs18     db  10,32,            "|[2]CS 18/L   |  |3.0 |  |CS THESIS WRITING 1                              |  |CS 17/L,   |",10,32,
+                                 "|             |  |    |  |                                                 |  |CSE 13/L   |",0,51
+  cs19     db  10,32,            "|[3]CS 19/L   |  |4.0 |  |OPERATING SYSTEMS                                |  |CS 11/L    |",0,51
+  cs24     db  10,32,            "|[4]CS 24/L   |  |3.0 |  |CS PROFESSIONAL TRACK 6                          |  |CS 20/L    |",0,51
+  cs21     db  10,32,            "|[5]CS 21/L   |  |3.0 |  |NETWORKS AND COMMUNICATIONS                      |  |CS 11/L    |",0,51
 ; 4TH YEAR 1ST SEM END
 
 ; 4TH YEAR 2ND SEM START
-  y4s2     db  10,8,32,            "|                                   4th Year/2nd Sem                                      |",0
-  caed500  db  10,8,32,            "|[1]CAED 500c |  |3.0 |  |CAREER AND PERSONALITY DEVELOPMENT               |  |4th year   |",10,8,32,
-                                   "|             |  |    |  |                                                 |  |standing   |",0,51
-  cs22     db  10,8,32,            "|[2]CS 22/L   |  |3.0 |  |INFORMATION ASSURANCE AND SECURITY               |  |CS 21/L    |",0,51
-  cs23     db  10,8,32,            "|[3]CS 23/L   |  |6.0 |  |CS THESIS WRITING 2                              |  |CS 18/L    |",0,51
+  y4s2     db  10,32,            "|                                   4th Year/2nd Sem                                      |",0
+  caed500  db  10,32,            "|[1]CAED 500c |  |3.0 |  |CAREER AND PERSONALITY DEVELOPMENT               |  |4th year   |",10,32,
+                                 "|             |  |    |  |                                                 |  |standing   |",0,51
+  cs22     db  10,32,            "|[2]CS 22/L   |  |3.0 |  |INFORMATION ASSURANCE AND SECURITY               |  |CS 21/L    |",0,51
+  cs23     db  10,32,            "|[3]CS 23/L   |  |6.0 |  |CS THESIS WRITING 2                              |  |CS 18/L    |",0,51
 ; 4TH YEAR 2ND SEM END
 
 ; MENU
-  selYL db 10,10,8,"1: 1st Year",10,"2: 2nd Year",10,"3: 3rd Year",10,"4: 4th Year",10,"Select Year Level: ",0
-  errYL db 10,8,32,"Select only from 1-4",0
+  yearPrompt db 10,10,9,9,9,9,9,9,9,9,9,9,"Select Which YEAR You'll BE Enrolling In",0
+  selYL db 10,10,"1: 1st Year",10,"2: 2nd Year",10,"3: 3rd Year",10,"4: 4th Year",10,"Select Year Level: ",0
+  errYL db 10,32,"Select only from 1-4",0
 
-  selSE db 10,10,8,"1: 1st Sem",10,"2: 2nd Sem",10,"s: Summer",10,"Select Semester: ",0
-  errSE db 10,8,32,"Select only from [1,2,s]",0
+  selSEM db 10,10,"1: 1st Sem",10,"2: 2nd Sem",10,"Select Semester: ",0
+  errSEM db 10,32,"Select only from [1-2]",0
 
-  comp   db 10,10,8,"Type [C] to comlete",0
-  inv    db 10,10,8,"Invalid input, select the appropriate option",0
-  selSU9 db 10,10,8,"Select Subject [1-9]: ",0
-  selSU8 db 10,10,8,"Select Subject [1-8]: ",0
-  selSU7 db 10,10,8,"Select Subject [1-7]: ",0
-  selSU6 db 10,10,8,"Select Subject [1-6]: ",0
-  selSU2 db 10,10,8,"Select Subject [1-2]: ",0
+  comp   db 10,10,"Type [C] to Complete",0
+  inv    db 10,10,"Invalid input, select the appropriate option",0
+  selSU9 db 10,10,"Select Subject [1-9]: ",0
+  selSU8 db 10,10,"Select Subject [1-8]: ",0
+  selSU7 db 10,10,"Select Subject [1-7]: ",0
+  selSU6 db 10,10,"Select Subject [1-6]: ",0
+  selSU2 db 10,10,"Select Subject [1-2]: ",0
 
   totalU db "Total Units: ", 0
 
@@ -147,9 +148,13 @@ option casemap :none
 ; INPUTS
 	studNameIn  db 100 dup(?)
 	courseIn    db 100 dup(?)
-	yearIn      db 100 dup(?)
-	semIn       db 100 dup(?)
+  currYear    db 100 dup(?) ;Current Year
+
+	yearIn      db 100 dup(?) ;Year Enrolled
+	semIn       db 100 dup(?) ;Sem Enrolled
+
 	subIn       db 100 dup(?)
+
 	year1sem1In db 10  dup(?) ;1st Year/1st Sem
   year1sem2In db 10  dup(?) ;1st Year/2nd Sem
   year2sem1In db 10  dup(?) ;2nd Year/1st Sem
@@ -178,7 +183,7 @@ start:
   invoke StdOut, addr course
   invoke StdIn,  addr courseIn, 100
 	invoke StdOut, addr year
-  invoke StdIn,  addr yearIn, 100
+  invoke StdIn,  addr currYear, 100
 
   JMP display
 
@@ -318,12 +323,13 @@ display:
   jmp LEVEL
 
 LEVEL:
+  invoke StdOut, addr yearPrompt
   invoke StdOut, addr selYL
   invoke StdIn,  addr yearIn, 10
   .if yearIn == "1"
     jmp YEAR1
-  ; .elseif yearIn == "2"
-  ;   jmp YEAR2
+  .elseif yearIn == "2"
+  ; jmp YEAR2
   ; .elseif yearIn == "3"
   ;   jmp YEAR3
   ; .elseif yearIn == "4"
@@ -335,31 +341,31 @@ LEVEL:
 
 ; START YEAR CHOICE
 YEAR1:
-  invoke StdOut, addr selSE
+  invoke StdOut, addr selSEM
   invoke StdIn,  addr semIn, 10
   .if semIn == "1"
     jmp SEM11
   ; .elseif semIn == "2"
   ;   jmp SEM12
   .else
-    invoke StdOut, addr errSE
+    invoke StdOut, addr errSEM
     jmp LEVEL
   .endif
 
 ; YEAR2:
-;   invoke StdOut, addr selSE
+;   invoke StdOut, addr selSEM
 ;   invoke StdIn,  addr semIn, 10
 ;   .if semIn == "1"
 ;     jmp SEM21
 ;   .elseif semIn == "2"
 ;     jmp SEM22
 ;   .else
-;     invoke StdOut, addr errSE
+;     invoke StdOut, addr errSEM
 ;     jmp LEVEL
 ;   .endif
 
 ; YEAR3:
-;   invoke StdOut, addr selSE
+;   invoke StdOut, addr selSEM
 ;   invoke StdIn,  addr semIn, 10
 ;   .if semIn == "1"
 ;     jmp SEM31
@@ -368,30 +374,30 @@ YEAR1:
 ;   .elseif semIn == "s"
 ;     jmp SEM3S
 ;   .else
-;     invoke StdOut, addr errSE
+;     invoke StdOut, addr errSEM
 ;     jmp LEVEL
 ;   .endif
 
 ; YEAR4:
-;   invoke StdOut, addr selSE
+;   invoke StdOut, addr selSEM
 ;   invoke StdIn,  addr semIn, 10
 ;   .if semIn == "1"
 ;     jmp SEM41
 ;   .elseif semIn == "2"
 ;     jmp SEM42
 ;   .else
-;     invoke StdOut, addr errSE
+;     invoke StdOut, addr errSEM
 ;     jmp LEVEL
 ;   .endif
 ; END YEAR CHOICE
 
-; START SEM1 CHOICE
+; START 1st Year 1st Sem CHOICE
 SEM11:
-  invoke ClearScreen
-  invoke StdOut, addr comp
+  invoke StdOut, addr plainBor
   invoke StdOut, addr y1s1
+  invoke StdOut, addr border
 	invoke StdOut, addr header
-
+  invoke StdOut, addr border
   invoke StdOut, addr cs8
   invoke StdOut, addr ge2
   invoke StdOut, addr ge15
@@ -400,6 +406,8 @@ SEM11:
   invoke StdOut, addr cce101
   invoke StdOut, addr cce109
   invoke StdOut, addr nstp1
+  invoke StdOut, addr border
+
   jmp SELSUB11
 
 ; SELECT SUBJECTS TO ADD
@@ -418,6 +426,7 @@ SELSUB11:
     cld
     mov ecx, lengthof cs8
     rep movsb
+    
   .elseif subIn == "2"
     add eax, 3
     sub eax, 1
