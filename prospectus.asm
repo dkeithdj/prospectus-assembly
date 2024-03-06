@@ -10,12 +10,12 @@ option casemap :none
 
 .data
 ; HEADER START
-  uMin     db  10,10,9,9,9,9,9,9,9,32, "UNIVERSITY OF MINDANAO"                  ,0
-  major    db  10,9,9,9,9,9,9,32,        "Bachelor of Science in Computer Science" ,0
-  dept     db  10,9,9,9,9,9,9,32,      "COLLEGE OF COMPUTING EDUCATION EDUCATION",0
+  uMin     db  10,10,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,32, "UNIVERSITY OF MINDANAO"                  ,0
+  major    db  10,9,9,9,9,9,9,9,9,9,9,9,9,9,9,32, "Bachelor of Science in Computer Science" ,0
+  dept     db  10,9,9,9,9,9,9,9,9,9,9,9,9,9,9,32, "COLLEGE OF COMPUTING EDUCATION EDUCATION",0
   studName db  10,10, "Name: ",0
-  course   db  "Course: ",0
-  year     db  "Year: ",0
+  course   db  10,"Course: ",0
+  year     db  10,"Year: ",0
 
 ; BORDERS AND HEADER
   plainBor db  10,32,            "___________________________________________________________________________________________",0
@@ -123,23 +123,31 @@ option casemap :none
   cs23     db  10,32,            "|[3]CS 23/L   |  |6.0 |  |CS THESIS WRITING 2                              |  |CS 18/L    |",0,51
 ; 4TH YEAR 2ND SEM END
 
+; ENROLLED PROMPTS
+  enrolled db  10,32,            "|                                      SUBJECTS ENROLLED                                  |",0
+
 ; MENU
-  yearPrompt db 10,10,9,9,9,9,9,9,9,9,9,9,"Select Which YEAR You'll BE Enrolling In",0
+  yearPrompt db 10,10,10,10,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,"Select Which YEAR You'll BE Enrolling In",0
   selYL db 10,10,"1: 1st Year",10,"2: 2nd Year",10,"3: 3rd Year",10,"4: 4th Year",10,"Select Year Level: ",0
   errYL db 10,32,"Select only from 1-4",0
 
   selSEM db 10,10,"1: 1st Sem",10,"2: 2nd Sem",10,"Select Semester: ",0
+  selSEMsum db 10,10,"1: 1st Sem",10,"2: 2nd Sem",10,"S: Summer",10,"Select Semester: ",0
   errSEM db 10,32,"Select only from [1-2]",0
 
   comp   db 10,10,"Type [C] to Complete",0
   inv    db 10,10,"Invalid input, select the appropriate option",0
   selSU9 db 10,10,"Select Subject [1-9]: ",0
   selSU8 db 10,10,"Select Subject [1-8]: ",0
-  selSU7 db 10,10,"Select Subject [1-7]: ",0
-  selSU6 db 10,10,"Select Subject [1-6]: ",0
+  selSU5 db 10,10,"Select Subject [1-5]: ",0
+  selSU3 db 10,10,"Select Subject [1-3]: ",0
   selSU2 db 10,10,"Select Subject [1-2]: ",0
 
-  totalU db "Total Units: ", 0
+  totalU db 10,10,"Total Enrolled Units: ", 0
+
+  viewPros db 10,10,"[V] View Prospectus", 0
+  exitEnroll db 10,"[E] Exit", 0
+  lastSelection db 10,"Type desired action: ", 0  
 
   total  DWORD ?
 
@@ -154,13 +162,7 @@ option casemap :none
 	semIn       db 100 dup(?) ;Sem Enrolled
 
 	subIn       db 100 dup(?)
-
-	year1sem1In db 10  dup(?) ;1st Year/1st Sem
-  year1sem2In db 10  dup(?) ;1st Year/2nd Sem
-  year2sem1In db 10  dup(?) ;2nd Year/1st Sem
-  year2sem2In db 10  dup(?) ;2nd Year/2nd Sem
-
-  selected db 500 dup(?)
+  totalUnits  db 30 dup(?)
 
   sel1 db 500 dup(?)
   sel2 db 500 dup(?)
@@ -171,6 +173,8 @@ option casemap :none
   sel7 db 500 dup(?)
   sel8 db 500 dup(?)
   sel9 db 500 dup(?)
+
+  lastInput db 10 dup(?)
 
 .code
 start: 
@@ -329,11 +333,11 @@ LEVEL:
   .if yearIn == "1"
     jmp YEAR1
   .elseif yearIn == "2"
-  ; jmp YEAR2
-  ; .elseif yearIn == "3"
-  ;   jmp YEAR3
-  ; .elseif yearIn == "4"
-  ;   jmp YEAR4
+    jmp YEAR2
+  .elseif yearIn == "3"
+    jmp YEAR3
+  .elseif yearIn == "4"
+    jmp YEAR4
   .else
     invoke StdOut, addr errYL
     jmp LEVEL
@@ -345,50 +349,50 @@ YEAR1:
   invoke StdIn,  addr semIn, 10
   .if semIn == "1"
     jmp SEM11
-  ; .elseif semIn == "2"
-  ;   jmp SEM12
+  .elseif semIn == "2"
+    jmp SEM12
   .else
     invoke StdOut, addr errSEM
     jmp LEVEL
   .endif
 
-; YEAR2:
-;   invoke StdOut, addr selSEM
-;   invoke StdIn,  addr semIn, 10
-;   .if semIn == "1"
-;     jmp SEM21
-;   .elseif semIn == "2"
-;     jmp SEM22
-;   .else
-;     invoke StdOut, addr errSEM
-;     jmp LEVEL
-;   .endif
+YEAR2:
+  invoke StdOut, addr selSEM
+  invoke StdIn,  addr semIn, 10
+    .if semIn == "1"
+      jmp SEM21
+    .elseif semIn == "2"
+      jmp SEM22
+   .else
+      invoke StdOut, addr errSEM
+      jmp LEVEL
+   .endif
 
-; YEAR3:
-;   invoke StdOut, addr selSEM
-;   invoke StdIn,  addr semIn, 10
-;   .if semIn == "1"
-;     jmp SEM31
-;   .elseif semIn == "2"
-;     jmp SEM32
-;   .elseif semIn == "s"
-;     jmp SEM3S
-;   .else
-;     invoke StdOut, addr errSEM
-;     jmp LEVEL
-;   .endif
+YEAR3:
+  invoke StdOut, addr selSEMsum
+  invoke StdIn,  addr semIn, 10
+    .if semIn == "1"
+      jmp SEM31
+    .elseif semIn == "2"
+      jmp SEM32
+    .elseif semIn == "S"
+      jmp SEM3S
+    .else
+      invoke StdOut, addr errSEM
+      jmp LEVEL
+   .endif
 
-; YEAR4:
-;   invoke StdOut, addr selSEM
-;   invoke StdIn,  addr semIn, 10
-;   .if semIn == "1"
-;     jmp SEM41
-;   .elseif semIn == "2"
-;     jmp SEM42
-;   .else
-;     invoke StdOut, addr errSEM
-;     jmp LEVEL
-;   .endif
+YEAR4:
+  invoke StdOut, addr selSEM
+  invoke StdIn,  addr semIn, 10
+    .if semIn == "1"
+      jmp SEM41
+    .elseif semIn == "2"
+      jmp SEM42
+    .else
+      invoke StdOut, addr errSEM
+      jmp LEVEL
+    .endif
 ; END YEAR CHOICE
 
 ; START 1st Year 1st Sem CHOICE
@@ -410,15 +414,154 @@ SEM11:
 
   jmp SELSUB11
 
+; START 1st Year 2nd Sem CHOICE
+SEM12:
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr y1s2
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr uge1
+  invoke StdOut, addr ge1
+  invoke StdOut, addr ge4
+  invoke StdOut, addr cce107
+  invoke StdOut, addr cs25
+  invoke StdOut, addr mth101   
+  invoke StdOut, addr pahf2
+  invoke StdOut, addr nstp2    
+  invoke StdOut, addr border
+
+  jmp SELSUB12
+
+; START 2nd Year 1st Sem CHOICE
+SEM21:
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr y2s1
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr hci101
+  invoke StdOut, addr cce104
+  invoke StdOut, addr cs26
+  invoke StdOut, addr cs3
+  invoke StdOut, addr cce105
+  invoke StdOut, addr cst4   
+  invoke StdOut, addr mth103
+  invoke StdOut, addr mth105
+  invoke StdOut, addr pahf3   
+  invoke StdOut, addr border
+
+  jmp SELSUB21
+
+; START 2nd Year 1st Sem CHOICE
+SEM22:
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr y2s2
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr ge6
+  invoke StdOut, addr ge8
+  invoke StdOut, addr cst5
+  invoke StdOut, addr ge11
+  invoke StdOut, addr bsm222
+  invoke StdOut, addr cs6   
+  invoke StdOut, addr bsm312
+  invoke StdOut, addr cse7
+  invoke StdOut, addr pahf4
+  invoke StdOut, addr border
+
+  jmp SELSUB22
+
+; START 3rd Year 1st Sem CHOICE
+SEM31:
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr y3s1
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr ge5
+  invoke StdOut, addr cs12
+  invoke StdOut, addr cst9
+  invoke StdOut, addr cs15
+  invoke StdOut, addr bsm325
+  invoke StdOut, addr phys101  
+  invoke StdOut, addr ge7
+  invoke StdOut, addr cs11
+  invoke StdOut, addr border
+
+  jmp SELSUB31
+
+; START 3rd Year 2nd Sem CHOICE
+SEM32:
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr y3s2
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr cs20
+  invoke StdOut, addr ge20
+  invoke StdOut, addr cs17
+  invoke StdOut, addr cse13
+  invoke StdOut, addr phys102
+  invoke StdOut, addr cst14  
+  invoke StdOut, addr cse10
+  invoke StdOut, addr uge2
+  invoke StdOut, addr border
+
+  jmp SELSUB32
+
+; START 3rd Year Summer CHOICE
+SEM3S:
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr y3ss
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr ge9
+  invoke StdOut, addr cs16
+  invoke StdOut, addr border
+
+  jmp SELSUB3S
+
+; START 4th Year 1st Sem CHOICE
+SEM41:
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr y4s1
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr cce106
+  invoke StdOut, addr cs18
+  invoke StdOut, addr cs19
+  invoke StdOut, addr cs24
+  invoke StdOut, addr cs21
+  invoke StdOut, addr border
+
+  jmp SELSUB41
+
+; START 4th Year 2nd Sem CHOICE
+SEM42:
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr y4s2
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr caed500
+  invoke StdOut, addr cs22
+  invoke StdOut, addr cs23
+  invoke StdOut, addr border
+
+  jmp SELSUB42
+
 ; SELECT SUBJECTS TO ADD
+;1st Year 1st Sem
 SELSUB11:
   invoke StdOut, addr selSU8
   invoke StdIn, addr subIn, 10
+
   .if subIn == "1"
-  invoke StdOut, addr sel1
-    add eax, 3
-    sub eax, 1
-    add total, eax
+    add total, 3
     invoke StdOut, addr cs8
 
     mov esi, offset cs8
@@ -428,9 +571,7 @@ SELSUB11:
     rep movsb
     
   .elseif subIn == "2"
-    add eax, 3
-    sub eax, 1
-    add total, eax
+    add total, 6
     invoke StdOut, addr ge2
 
     mov esi, offset ge2
@@ -438,10 +579,9 @@ SELSUB11:
     cld
     mov ecx, lengthof ge2
     rep movsb
+
   .elseif subIn == "3"
-    add eax, 3
-    sub eax, 1
-    add total, eax
+    add total, 3
     invoke StdOut, addr ge15
 
     mov esi, offset ge15
@@ -449,10 +589,9 @@ SELSUB11:
     cld
     mov ecx, lengthof ge15
     rep movsb
+
   .elseif subIn == "4"
-    add eax, 3
-    sub eax, 1
-    add total, eax
+    add total, 3
     invoke StdOut, addr ge3
 
     mov esi, offset ge3
@@ -460,10 +599,9 @@ SELSUB11:
     cld
     mov ecx, lengthof ge3
     rep movsb
+
   .elseif subIn == "5"
-    add eax, 2
-    sub eax, 1
-    add total, eax
+    add total, 2
     invoke StdOut, addr pahf1
 
     mov esi, offset pahf1
@@ -471,10 +609,9 @@ SELSUB11:
     cld
     mov ecx, lengthof pahf1
     rep movsb
+
   .elseif subIn == "6"
-    add eax, 3
-    sub eax, 1
-    add total, eax
+    add total, 3
     invoke StdOut, addr cce101
 
     mov esi, offset cce101
@@ -482,10 +619,9 @@ SELSUB11:
     cld
     mov ecx, lengthof cce101
     rep movsb
+
   .elseif subIn == "7"
-    add eax, 3
-    sub eax, 1
-    add total, eax
+    add total, 3
     invoke StdOut, addr cce109
 
     mov esi, offset cce109
@@ -493,10 +629,9 @@ SELSUB11:
     cld
     mov ecx, lengthof cce109
     rep movsb
+
   .elseif subIn == "8"
-    add eax, 3
-    sub eax, 1
-    add total, eax
+    add total, 3
     invoke StdOut, addr nstp1
 
     mov esi, offset nstp1
@@ -504,20 +639,663 @@ SELSUB11:
     cld
     mov ecx, lengthof nstp1
     rep movsb
-  .elseif subIn == "D"
+
+  .elseif subIn == "C"
     jmp TOTAL11
+
   .else
     invoke StdOut, addr inv
     jmp SELSUB11
-  .endif
-  jmp SELSUB11
 
-  
+  .endif
+    jmp SELSUB11
+
+;1st Year 2nd Sem
+SELSUB12:
+  invoke StdOut, addr selSU8
+  invoke StdIn, addr subIn, 10
+
+  .if subIn == "1"
+    add total, 6
+    invoke StdOut, addr uge1
+
+    mov esi, offset uge1
+    mov edi, offset sel1
+    cld
+    mov ecx, lengthof uge1
+    rep movsb
+    
+  .elseif subIn == "2"
+    add total, 3
+    invoke StdOut, addr ge1
+
+    mov esi, offset ge1
+    mov edi, offset sel2
+    cld
+    mov ecx, lengthof ge1
+    rep movsb
+
+  .elseif subIn == "3"
+    add total, 3
+    invoke StdOut, addr ge4
+
+    mov esi, offset ge4
+    mov edi, offset sel3
+    cld
+    mov ecx, lengthof ge4
+    rep movsb
+
+  .elseif subIn == "4"
+    add total, 3
+    invoke StdOut, addr cce107
+
+    mov esi, offset cce107
+    mov edi, offset sel4
+    cld
+    mov ecx, lengthof cce107
+    rep movsb
+
+  .elseif subIn == "5"
+    add total, 3
+    invoke StdOut, addr cs25
+
+    mov esi, offset cs25
+    mov edi, offset sel5
+    cld
+    mov ecx, lengthof cs25
+    rep movsb
+
+  .elseif subIn == "6"
+    add total, 3
+    invoke StdOut, addr mth101
+
+    mov esi, offset mth101
+    mov edi, offset sel6
+    cld
+    mov ecx, lengthof mth101
+    rep movsb
+
+  .elseif subIn == "7"
+    add total, 2
+    invoke StdOut, addr pahf2
+
+    mov esi, offset pahf2
+    mov edi, offset sel7
+    cld
+    mov ecx, lengthof pahf2
+    rep movsb
+
+  .elseif subIn == "8"
+    add total, 3
+    invoke StdOut, addr nstp2
+
+    mov esi, offset nstp2
+    mov edi, offset sel8
+    cld
+    mov ecx, lengthof nstp2
+    rep movsb
+
+  .elseif subIn == "C"
+    jmp TOTAL12
+
+  .else
+    invoke StdOut, addr inv
+    jmp SELSUB12
+
+  .endif
+    jmp SELSUB12
+
+;2nd Year 1st Sem
+SELSUB21:
+  invoke StdOut, addr selSU9
+  invoke StdIn, addr subIn, 10
+
+  .if subIn == "1"
+    add total, 3
+    invoke StdOut, addr hci101
+
+    mov esi, offset hci101
+    mov edi, offset sel1
+    cld
+    mov ecx, lengthof hci101
+    rep movsb
+    
+  .elseif subIn == "2"
+    add total, 3
+    invoke StdOut, addr cce104
+
+    mov esi, offset cce104
+    mov edi, offset sel2
+    cld
+    mov ecx, lengthof cce104
+    rep movsb
+
+  .elseif subIn == "3"
+    add total, 3
+    invoke StdOut, addr cs26
+
+    mov esi, offset cs26
+    mov edi, offset sel3
+    cld
+    mov ecx, lengthof cs26
+    rep movsb
+
+  .elseif subIn == "4"
+    add total, 3
+    invoke StdOut, addr cs3
+
+    mov esi, offset cs3
+    mov edi, offset sel4
+    cld
+    mov ecx, lengthof cs3
+    rep movsb
+
+  .elseif subIn == "5"
+    add total, 3
+    invoke StdOut, addr cce105
+
+    mov esi, offset cce105
+    mov edi, offset sel5
+    cld
+    mov ecx, lengthof cce105
+    rep movsb
+
+  .elseif subIn == "6"
+    add total, 3
+    invoke StdOut, addr cst4
+
+    mov esi, offset cst4
+    mov edi, offset sel6
+    cld
+    mov ecx, lengthof cst4
+    rep movsb
+
+  .elseif subIn == "7"
+    add total, 3
+    invoke StdOut, addr mth103
+
+    mov esi, offset mth103
+    mov edi, offset sel7
+    cld
+    mov ecx, lengthof mth103
+    rep movsb
+
+  .elseif subIn == "8"
+    add total, 3
+    invoke StdOut, addr mth105
+
+    mov esi, offset mth105
+    mov edi, offset sel8
+    cld
+    mov ecx, lengthof mth105
+    rep movsb
+
+  .elseif subIn == "9"
+    add total, 2
+    invoke StdOut, addr pahf3
+
+    mov esi, offset pahf3
+    mov edi, offset sel9
+    cld
+    mov ecx, lengthof pahf3
+    rep movsb
+
+  .elseif subIn == "C"
+    jmp TOTAL21
+
+  .else
+    invoke StdOut, addr inv
+    jmp SELSUB21
+
+  .endif
+    jmp SELSUB21
+
+;2nd Year 2nd Sem
+SELSUB22:
+  invoke StdOut, addr selSU9
+  invoke StdIn, addr subIn, 10
+
+  .if subIn == "1"
+    add total, 3
+    invoke StdOut, addr ge6
+
+    mov esi, offset ge6
+    mov edi, offset sel1
+    cld
+    mov ecx, lengthof ge6
+    rep movsb
+    
+  .elseif subIn == "2"
+    add total, 3
+    invoke StdOut, addr ge8
+
+    mov esi, offset ge8
+    mov edi, offset sel2
+    cld
+    mov ecx, lengthof ge8
+    rep movsb
+
+  .elseif subIn == "3"
+    add total, 3
+    invoke StdOut, addr cst5
+
+    mov esi, offset cst5
+    mov edi, offset sel3
+    cld
+    mov ecx, lengthof cst5
+    rep movsb
+
+  .elseif subIn == "4"
+    add total, 3
+    invoke StdOut, addr ge11
+
+    mov esi, offset ge11
+    mov edi, offset sel4
+    cld
+    mov ecx, lengthof ge11
+    rep movsb
+
+  .elseif subIn == "5"
+    add total, 3
+    invoke StdOut, addr bsm222
+
+    mov esi, offset bsm222
+    mov edi, offset sel5
+    cld
+    mov ecx, lengthof bsm222
+    rep movsb
+
+  .elseif subIn == "6"
+    add total, 3
+    invoke StdOut, addr cs6
+
+    mov esi, offset cs6
+    mov edi, offset sel6
+    cld
+    mov ecx, lengthof cs6
+    rep movsb
+
+  .elseif subIn == "7"
+    add total, 3
+    invoke StdOut, addr bsm312
+
+    mov esi, offset bsm312
+    mov edi, offset sel7
+    cld
+    mov ecx, lengthof bsm312
+    rep movsb
+
+  .elseif subIn == "8"
+    add total, 3
+    invoke StdOut, addr cse7
+
+    mov esi, offset cse7
+    mov edi, offset sel8
+    cld
+    mov ecx, lengthof cse7
+    rep movsb
+
+  .elseif subIn == "9"
+    add total, 2
+    invoke StdOut, addr pahf4
+
+    mov esi, offset pahf4
+    mov edi, offset sel9
+    cld
+    mov ecx, lengthof pahf4
+    rep movsb
+
+  .elseif subIn == "C"
+    jmp TOTAL22
+
+  .else
+    invoke StdOut, addr inv
+    jmp SELSUB22
+
+  .endif
+    jmp SELSUB22
+
+;3rd Year 1st Sem
+SELSUB31:
+  invoke StdOut, addr selSU8
+  invoke StdIn, addr subIn, 10
+
+  .if subIn == "1"
+    add total, 3
+    invoke StdOut, addr ge5
+
+    mov esi, offset ge5
+    mov edi, offset sel1
+    cld
+    mov ecx, lengthof ge5
+    rep movsb
+    
+  .elseif subIn == "2"
+    add total, 3
+    invoke StdOut, addr cs12
+
+    mov esi, offset cs12
+    mov edi, offset sel2
+    cld
+    mov ecx, lengthof cs12
+    rep movsb
+
+  .elseif subIn == "3"
+    add total, 3
+    invoke StdOut, addr cst9
+
+    mov esi, offset cst9
+    mov edi, offset sel3
+    cld
+    mov ecx, lengthof cst9
+    rep movsb
+
+  .elseif subIn == "4"
+    add total, 3
+    invoke StdOut, addr cs15
+
+    mov esi, offset cs15
+    mov edi, offset sel4
+    cld
+    mov ecx, lengthof cs15
+    rep movsb
+
+  .elseif subIn == "5"
+    add total, 3
+    invoke StdOut, addr bsm325
+
+    mov esi, offset bsm325
+    mov edi, offset sel5
+    cld
+    mov ecx, lengthof bsm325
+    rep movsb
+
+  .elseif subIn == "6"
+    add total, 4
+    invoke StdOut, addr phys101
+
+    mov esi, offset phys101
+    mov edi, offset sel6
+    cld
+    mov ecx, lengthof phys101
+    rep movsb
+
+  .elseif subIn == "7"
+    add total, 3
+    invoke StdOut, addr ge7
+
+    mov esi, offset ge7
+    mov edi, offset sel7
+    cld
+    mov ecx, lengthof ge7
+    rep movsb
+
+  .elseif subIn == "8"
+    add total, 3
+    invoke StdOut, addr cs11
+
+    mov esi, offset cs11
+    mov edi, offset sel8
+    cld
+    mov ecx, lengthof cs11
+    rep movsb
+
+  .elseif subIn == "C"
+    jmp TOTAL31
+
+  .else
+    invoke StdOut, addr inv
+    jmp SELSUB31
+
+  .endif
+    jmp SELSUB31
+
+;3rd Year 2nd Sem
+SELSUB32:
+  invoke StdOut, addr selSU8
+  invoke StdIn, addr subIn, 10
+
+  .if subIn == "1"
+    add total, 3
+    invoke StdOut, addr cs20
+
+    mov esi, offset cs20
+    mov edi, offset sel1
+    cld
+    mov ecx, lengthof cs20
+    rep movsb
+    
+  .elseif subIn == "2"
+    add total, 3
+    invoke StdOut, addr ge20
+
+    mov esi, offset ge20
+    mov edi, offset sel2
+    cld
+    mov ecx, lengthof ge20
+    rep movsb
+
+  .elseif subIn == "3"
+    add total, 3
+    invoke StdOut, addr cs17
+
+    mov esi, offset cs17
+    mov edi, offset sel3
+    cld
+    mov ecx, lengthof cs17
+    rep movsb
+
+  .elseif subIn == "4"
+    add total, 3
+    invoke StdOut, addr cse13
+
+    mov esi, offset cse13
+    mov edi, offset sel4
+    cld
+    mov ecx, lengthof cse13
+    rep movsb
+
+  .elseif subIn == "5"
+    add total, 4
+    invoke StdOut, addr phys102
+
+    mov esi, offset phys102
+    mov edi, offset sel5
+    cld
+    mov ecx, lengthof phys102
+    rep movsb
+
+  .elseif subIn == "6"
+    add total, 3
+    invoke StdOut, addr cst14
+
+    mov esi, offset cst14
+    mov edi, offset sel6
+    cld
+    mov ecx, lengthof cst14
+    rep movsb
+
+  .elseif subIn == "7"
+    add total, 3
+    invoke StdOut, addr cse10
+
+    mov esi, offset cse10
+    mov edi, offset sel7
+    cld
+    mov ecx, lengthof cse10
+    rep movsb
+
+  .elseif subIn == "8"
+    add total, 3
+    invoke StdOut, addr uge2
+
+    mov esi, offset uge2
+    mov edi, offset sel8
+    cld
+    mov ecx, lengthof uge2
+    rep movsb
+
+  .elseif subIn == "C"
+    jmp TOTAL32
+
+  .else
+    invoke StdOut, addr inv
+    jmp SELSUB32
+
+  .endif
+    jmp SELSUB32
+
+;3rd Year Summer
+SELSUB3S:
+  invoke StdOut, addr selSU2
+  invoke StdIn, addr subIn, 10
+
+  .if subIn == "1"
+    add total, 3
+    invoke StdOut, addr ge9
+
+    mov esi, offset ge9
+    mov edi, offset sel1
+    cld
+    mov ecx, lengthof ge9
+    rep movsb
+    
+  .elseif subIn == "2"
+    add total, 6
+    invoke StdOut, addr cs16
+
+    mov esi, offset cs16
+    mov edi, offset sel2
+    cld
+    mov ecx, lengthof cs16
+    rep movsb
+
+  .elseif subIn == "C"
+    jmp TOTAL3S
+
+  .else
+    invoke StdOut, addr inv
+    jmp SELSUB3S
+
+  .endif
+    jmp SELSUB3S
+
+;4th Year 1st Sem
+SELSUB41:
+  invoke StdOut, addr selSU5
+  invoke StdIn, addr subIn, 10
+
+  .if subIn == "1"
+    add total, 3
+    invoke StdOut, addr cce106
+
+    mov esi, offset cce106
+    mov edi, offset sel1
+    cld
+    mov ecx, lengthof cce106
+    rep movsb
+    
+  .elseif subIn == "2"
+    add total, 3
+    invoke StdOut, addr cs18
+
+    mov esi, offset cs18
+    mov edi, offset sel2
+    cld
+    mov ecx, lengthof cs18
+    rep movsb
+
+  .elseif subIn == "3"
+    add total, 4
+    invoke StdOut, addr cs19
+
+    mov esi, offset cs19
+    mov edi, offset sel3
+    cld
+    mov ecx, lengthof cs19
+    rep movsb
+
+  .elseif subIn == "4"
+    add total, 3
+    invoke StdOut, addr cs24
+
+    mov esi, offset cs24
+    mov edi, offset sel4
+    cld
+    mov ecx, lengthof cs24
+    rep movsb
+
+  .elseif subIn == "5"
+    add total, 3
+    invoke StdOut, addr cs21
+
+    mov esi, offset cs21
+    mov edi, offset sel5
+    cld
+    mov ecx, lengthof cs21
+    rep movsb
+
+  .elseif subIn == "C"
+    jmp TOTAL41
+
+  .else
+    invoke StdOut, addr inv
+    jmp SELSUB41
+
+  .endif
+    jmp SELSUB41
+
+;4th Year 2nd Sem
+SELSUB42:
+  invoke StdOut, addr selSU3
+  invoke StdIn, addr subIn, 10
+
+  .if subIn == "1"
+    add total, 3
+    invoke StdOut, addr caed500
+
+    mov esi, offset caed500
+    mov edi, offset sel1
+    cld
+    mov ecx, lengthof caed500
+    rep movsb
+    
+  .elseif subIn == "2"
+    add total, 3
+    invoke StdOut, addr cs22
+
+    mov esi, offset cs22
+    mov edi, offset sel2
+    cld
+    mov ecx, lengthof cs22
+    rep movsb
+
+  .elseif subIn == "3"
+    add total, 6
+    invoke StdOut, addr cs23
+
+    mov esi, offset cs23
+    mov edi, offset sel3
+    cld
+    mov ecx, lengthof cs23
+    rep movsb
+
+  .elseif subIn == "C"
+    jmp TOTAL42
+
+  .else
+    invoke StdOut, addr inv
+    jmp SELSUB42
+
+  .endif
+    jmp SELSUB42
 
 ; SUMMARIZES SELECTED SUBJECTS
+
 TOTAL11:
-  mov eax, total 
-  invoke dwtoa, eax, addr subIn
+  mov ebx, total 
+  invoke dwtoa, ebx, addr totalUnits
+
   invoke ClearScreen
   invoke StdOut, addr uMin
   invoke StdOut, addr major
@@ -529,6 +1307,11 @@ TOTAL11:
 	invoke StdOut, addr year
   invoke StdOut,  addr yearIn
 
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr enrolled
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
   invoke StdOut, addr sel1
   invoke StdOut, addr sel2
   invoke StdOut, addr sel3
@@ -537,34 +1320,305 @@ TOTAL11:
   invoke StdOut, addr sel6
   invoke StdOut, addr sel7
   invoke StdOut, addr sel8
-  ;
+  invoke StdOut, addr border
+  
   ;TOTAL DISPLAY
   invoke StdOut, addr totalU
-  invoke StdOut, addr subIn 
+  invoke StdOut, addr totalUnits
 
-  jmp EXIT
+  jmp lastAction
 
+TOTAL12:
+  mov ebx, total 
+  invoke dwtoa, ebx, addr totalUnits
 
+  invoke ClearScreen
+  invoke StdOut, addr uMin
+  invoke StdOut, addr major
+  invoke StdOut, addr dept
+  invoke StdOut, addr studName
+  invoke StdOut,  addr studNameIn
+  invoke StdOut, addr course
+  invoke StdOut,  addr courseIn
+	invoke StdOut, addr year
+  invoke StdOut,  addr yearIn
+
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr enrolled
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr sel1
+  invoke StdOut, addr sel2
+  invoke StdOut, addr sel3
+  invoke StdOut, addr sel4
+  invoke StdOut, addr sel5
+  invoke StdOut, addr sel6
+  invoke StdOut, addr sel7
+  invoke StdOut, addr sel8
+  invoke StdOut, addr border
+  
+  ;TOTAL DISPLAY
+  invoke StdOut, addr totalU
+  invoke StdOut, addr totalUnits
+
+  jmp lastAction
+
+TOTAL21:
+  mov ebx, total 
+  invoke dwtoa, ebx, addr totalUnits
+
+  invoke ClearScreen
+  invoke StdOut, addr uMin
+  invoke StdOut, addr major
+  invoke StdOut, addr dept
+  invoke StdOut, addr studName
+  invoke StdOut,  addr studNameIn
+  invoke StdOut, addr course
+  invoke StdOut,  addr courseIn
+	invoke StdOut, addr year
+  invoke StdOut,  addr yearIn
+
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr enrolled
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr sel1
+  invoke StdOut, addr sel2
+  invoke StdOut, addr sel3
+  invoke StdOut, addr sel4
+  invoke StdOut, addr sel5
+  invoke StdOut, addr sel6
+  invoke StdOut, addr sel7
+  invoke StdOut, addr sel8
+  invoke StdOut, addr sel9
+  invoke StdOut, addr border
+  
+  ;TOTAL DISPLAY
+  invoke StdOut, addr totalU
+  invoke StdOut, addr totalUnits
+
+  jmp lastAction
+
+TOTAL22:
+  mov ebx, total 
+  invoke dwtoa, ebx, addr totalUnits
+
+  invoke ClearScreen
+  invoke StdOut, addr uMin
+  invoke StdOut, addr major
+  invoke StdOut, addr dept
+  invoke StdOut, addr studName
+  invoke StdOut,  addr studNameIn
+  invoke StdOut, addr course
+  invoke StdOut,  addr courseIn
+	invoke StdOut, addr year
+  invoke StdOut,  addr yearIn
+
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr enrolled
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr sel1
+  invoke StdOut, addr sel2
+  invoke StdOut, addr sel3
+  invoke StdOut, addr sel4
+  invoke StdOut, addr sel5
+  invoke StdOut, addr sel6
+  invoke StdOut, addr sel7
+  invoke StdOut, addr sel8
+  invoke StdOut, addr sel9
+  invoke StdOut, addr border
+  
+  ;TOTAL DISPLAY
+  invoke StdOut, addr totalU
+  invoke StdOut, addr totalUnits
+
+  jmp lastAction
+
+TOTAL31:
+  mov ebx, total 
+  invoke dwtoa, ebx, addr totalUnits
+
+  invoke ClearScreen
+  invoke StdOut, addr uMin
+  invoke StdOut, addr major
+  invoke StdOut, addr dept
+  invoke StdOut, addr studName
+  invoke StdOut,  addr studNameIn
+  invoke StdOut, addr course
+  invoke StdOut,  addr courseIn
+	invoke StdOut, addr year
+  invoke StdOut,  addr yearIn
+
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr enrolled
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr sel1
+  invoke StdOut, addr sel2
+  invoke StdOut, addr sel3
+  invoke StdOut, addr sel4
+  invoke StdOut, addr sel5
+  invoke StdOut, addr sel6
+  invoke StdOut, addr sel7
+  invoke StdOut, addr sel8
+  invoke StdOut, addr border
+  
+  ;TOTAL DISPLAY
+  invoke StdOut, addr totalU
+  invoke StdOut, addr totalUnits
+
+  jmp lastAction
+
+TOTAL32:
+  mov ebx, total 
+  invoke dwtoa, ebx, addr totalUnits
+
+  invoke ClearScreen
+  invoke StdOut, addr uMin
+  invoke StdOut, addr major
+  invoke StdOut, addr dept
+  invoke StdOut, addr studName
+  invoke StdOut, addr studNameIn
+  invoke StdOut, addr course
+  invoke StdOut, addr courseIn
+	invoke StdOut, addr year
+  invoke StdOut, addr yearIn
+
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr enrolled
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr sel1
+  invoke StdOut, addr sel2
+  invoke StdOut, addr sel3
+  invoke StdOut, addr sel4
+  invoke StdOut, addr sel5
+  invoke StdOut, addr sel6
+  invoke StdOut, addr sel7
+  invoke StdOut, addr sel8
+  invoke StdOut, addr border
+  
+  ;TOTAL DISPLAY
+  invoke StdOut, addr totalU
+  invoke StdOut, addr totalUnits
+
+  jmp lastAction
+
+TOTAL3S:
+  mov ebx, total 
+  invoke dwtoa, ebx, addr totalUnits
+
+  invoke ClearScreen
+  invoke StdOut, addr uMin
+  invoke StdOut, addr major
+  invoke StdOut, addr dept
+  invoke StdOut, addr studName
+  invoke StdOut, addr studNameIn
+  invoke StdOut, addr course
+  invoke StdOut, addr courseIn
+	invoke StdOut, addr year
+  invoke StdOut, addr yearIn
+
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr enrolled
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr sel1
+  invoke StdOut, addr sel2
+  invoke StdOut, addr border
+  
+  ;TOTAL DISPLAY
+  invoke StdOut, addr totalU
+  invoke StdOut, addr totalUnits
+
+  jmp lastAction
+
+TOTAL41:
+  mov ebx, total 
+  invoke dwtoa, ebx, addr totalUnits
+
+  invoke ClearScreen
+  invoke StdOut, addr uMin
+  invoke StdOut, addr major
+  invoke StdOut, addr dept
+  invoke StdOut, addr studName
+  invoke StdOut, addr studNameIn
+  invoke StdOut, addr course
+  invoke StdOut, addr courseIn
+	invoke StdOut, addr year
+  invoke StdOut, addr yearIn
+
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr enrolled
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr sel1
+  invoke StdOut, addr sel2
+  invoke StdOut, addr sel3
+  invoke StdOut, addr sel4
+  invoke StdOut, addr sel5
+  invoke StdOut, addr border
+
+  ;TOTAL DISPLAY
+  invoke StdOut, addr totalU
+  invoke StdOut, addr totalUnits
+
+  jmp lastAction
+
+TOTAL42:
+  mov ebx, total 
+  invoke dwtoa, ebx, addr totalUnits
+
+  invoke ClearScreen
+  invoke StdOut, addr uMin
+  invoke StdOut, addr major
+  invoke StdOut, addr dept
+  invoke StdOut, addr studName
+  invoke StdOut, addr studNameIn
+  invoke StdOut, addr course
+  invoke StdOut, addr courseIn
+	invoke StdOut, addr year
+  invoke StdOut, addr yearIn
+
+  invoke StdOut, addr plainBor
+  invoke StdOut, addr enrolled
+  invoke StdOut, addr border
+	invoke StdOut, addr header
+  invoke StdOut, addr border
+  invoke StdOut, addr sel1
+  invoke StdOut, addr sel2
+  invoke StdOut, addr sel3
+  invoke StdOut, addr border
+
+  ;TOTAL DISPLAY
+  invoke StdOut, addr totalU
+  invoke StdOut, addr totalUnits
+
+  jmp lastAction
+
+lastAction:
+  invoke StdOut, addr viewPros
+  invoke StdOut, addr exitEnroll
+  invoke StdOut, addr lastSelection
+  invoke StdIn, addr lastInput, 10
+
+  .if lastInput == "V"
+    jmp display
+  .elseif lastInput == "E"
+    jmp EXIT
+  .endif
+    jmp EXIT
 
 EXIT:
 
 invoke ExitProcess, 0
 
 end start
-
-
-; SELSUB11:
-;   invoke StdOut, addr selSU8
-;   invoke StdIn, addr subIn, 10
-;   .if subIn == "1"
-;   .elseif subIn == "2"
-;   .elseif subIn == "3"
-;   .elseif subIn == "4"
-;   .elseif subIn == "5"
-;   .elseif subIn == "6"
-;   .elseif subIn == "7"
-;   .elseif subIn == "8"
-;   .elseif subIn == "9"
-;   .elseif subIn == "D"
-;   .endif
-;
